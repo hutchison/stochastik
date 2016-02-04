@@ -1,0 +1,205 @@
+\documentclass[
+  10pt,
+]{report}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[]{parskip}
+\usepackage[]{microtype}
+\usepackage[cm]{fullpage}
+\usepackage[ngerman]{babel}
+
+\usepackage[]{amsmath}
+\usepackage[]{amssymb}
+
+\usepackage[]{booktabs}
+\usepackage[]{marvosym}
+\usepackage[]{enumerate}
+
+\usepackage[]{amsthm}
+\newtheoremstyle{satz}
+  {10pt}        % Abstand nach oben
+  {10pt}        % Abstand nach unten
+  {}            % Schriftart für Textkörper
+  {}            % Einrückung
+  {\bfseries}   % Schriftart für Textkopf („Satz“)
+  {:}           % Symbol nach Textkopf
+  {0.5em}       % Abstand nach Textkopf (\newline ist möglich)
+  {}            % Spezifikation des Textkopfes
+\theoremstyle{satz}
+\newtheorem{satz}{Satz}[section]
+
+\usepackage[]{hyperref}
+
+\begin{document}
+
+\chapter{Aufgaben}
+\label{cha:aufgaben}
+
+\section{Serie 1}
+\label{sec:serie_1}
+
+\subsection{Aufgabe 1}
+\label{sub:aufgabe_1_1}
+
+\begin{enumerate}[(i)]
+  \item Ein Computer soll mithilfe einer geeigneten Software im Jahr 2014
+    zweimal wöchentlich auf Computerviren untersucht werden.
+  \begin{enumerate}
+    \item Geben Sie für das in (i) beschriebene Zufallsexperiment die Menge der
+      Elementarereignisse unter der Annahme an, dass nur von Interesse ist, ob
+      der Computer mit Viren infiziert ist oder nicht!
+
+    \item Wie verändert sich das Ergebnis in (a), wenn auch die Anzahl der Viren
+      von Interesse ist?
+
+    \item Geben Sie in Mengenschreibweise das Ereignis an, dass pro Woche
+      mindestens ein Computervirus auftritt!
+  \end{enumerate}
+
+  \item Es seien $A_1, A_2, \dots, A_n$ nichtleere und disjunkte Teilmengen
+    einer Grundmenge $\Omega$. Gilt zusätzlich $\Omega = A_1 \cup \dots \cup
+    A_n$, so nennen wir $\{A_1, A_2, \dots, A_n\}$ eine Zerlegung (Partition)
+    der Grundmenge $\Omega$. Die kleinste $\sigma$-Algebra $\mathfrak{A} \subset
+    \mathfrak{P}(\Omega)$, welche alle Mengen $A_i$ der Zerlegung enthält, sei
+    durch $\sigma(A_1, \dots, A_n)$ bezeichnet. Es gilt
+    \begin{align*}
+      \mathfrak{A} = \sigma(A_1, \dots, A_n)
+      = \left\{ A_1^{\varepsilon_1}
+        \cup A_2^{\varepsilon_2}
+        \cup \dots
+        \cup A_n^{\varepsilon_n}:
+        \varepsilon_i \in \{0, 1\}, i = 1, \dots, n
+      \right\},
+    \end{align*}
+    wobei wir $B^1 := B$ und $B^0 := \emptyset$ für eine beliebige Teilmenge $B
+    \subset \Omega$ definieren.
+
+    \begin{enumerate}
+      \item Es seien die Mengen $A_1 = \{1,3\}, A_2 = \{2,4,6,8\}$ und $A_3 =
+        \{5,7,9\}$ gegeben. Bestimmen Sie $\sigma(A_1, A_2, A_3)$ für die
+        Zerlegung $\{A_1, A_2, A_3\}$ von $\Omega = \{1, 2, \dots, 9\}$.
+
+      \item Es sei $\{ A_1, A_2, \dots, A_n \}$ eine Zerlegung einer beliebigen
+        Grundmenge $\Omega$. Wieviele Elemente enthält $\sigma(A_1, \dots,
+        A_n)$?
+
+      \item Wie verändert sich die Antwort in (b), wenn genau $k$ Mengen
+        ${A_i}_1, \dots, {A_i}_k, i_j \in \{1, \dots, n\}, j = 1, \dots, k$ leer
+        sind?
+    \end{enumerate}
+
+  \item Die Ereignisse $A,B,C,D,E$ eines Ereignisfeldes besitzen die
+    Wahrscheinlichkeiten
+    \begin{align*}
+      \frac{1}{3}, \frac{1}{4}, \frac{1}{5}, \frac{1}{6}, \frac{1}{7}.
+    \end{align*}
+    Sind diese Ereignisse paarweise disjunkt? Begründen Sie Ihre Antwort!
+
+\end{enumerate}
+
+\subsection*{Lösung}
+
+\begin{enumerate}[(i)]
+    \item
+    \begin{enumerate}[(a)]
+      \item $\Omega = {\{ 0, 1 \}}^{104}$, wobei 0 dem Ereignis „nicht
+        infiziert“ und 1 dem Ereignis „infiziert“ entspricht.
+
+      \item $\Omega = {\mathbb{N}}^{104}$, wobei $0 \in \mathbb{N}$.
+
+      \item $A =
+        \left\{ (a_1, \dots, a_{104}) :
+          a_{2i} + a_{2i+1} > 0 \text{ mit } i \in \{ 1, \dots, 52 \}
+        \right\}$
+    \end{enumerate}
+    \item \begin{enumerate}[(a)]
+        \item $\sigma(A_1, A_2, A_3)$\\
+          $= \left\{ \emptyset, A_1, A_2, A_3, A_1 \cup A_2, A_1 \cup A_3, A_2
+          \cup A_3, A_1 \cup A_2 \cup A_3\right\}$\\
+          $= \{ \emptyset, \{1,3\}, \{2,4,6,8\}, \{5,7,9\}, \{1,2,3,4,6,8\},
+          \{1,3,5,7,9\}, \{2,4,5,6,7,8,9\}, \{1,2,3,4,5,6,7,8,9\}\}$
+
+        \item $|\sigma(A_1, \dots, A_n)| = 2^n$
+
+        \item $|\sigma(A_1, \dots, A_n)| = 2^{n-k}$
+      \end{enumerate}
+    \item Nein. Wären die Ereignisse paarweise disjunkt, dann wäre
+      \begin{align*}
+        P(A \cup B \cup C \cup D \cup E)
+        & = P(A) + P(B) + P(C) + P(D) + P(E) \leq 1
+      \end{align*}
+      Da die Summe der Wahrscheinlichkeiten jedoch $\frac{153}{140} > 1$
+      ist, können sie nicht disjunkt sein.
+\end{enumerate}
+
+\subsection{Aufgabe 3}
+\label{sub:aufgabe_1_3}
+
+Beweisen Sie den folgenden Satz aus der Vorlesung: Sei $\Omega \neq \emptyset$.
+Folgende Mengen sind $\sigma$-Algebren:
+
+\begin{enumerate}[(a)]
+  \item $\mathfrak{A}_1 := \{ \emptyset, \Omega \}$
+
+  \item $\mathfrak{A}_2 := \{ A, \overline{A}, \emptyset, \Omega \}$ mit $A
+    \subset \Omega$ beliebig,
+
+  \item (Zusatzaufgabe) $\mathfrak{A}_3 := \mathfrak{P}(\Omega)$.
+
+\end{enumerate}
+
+\subsection*{Lösung}
+\begin{enumerate}[(a)]
+  \item Offensichtlich sind $\emptyset$ und $\Omega \in \mathfrak{A}_1$.
+
+    Da $\emptyset \in \mathfrak{A}_1$ und $\overline{\emptyset} = \Omega
+    \setminus \emptyset = \Omega \in \mathfrak{A}_1$ und außerdem $\Omega \in
+    \mathfrak{A}_1$ und $\overline{\Omega} = \Omega \setminus \Omega = \emptyset
+    \in \mathfrak{A}_1$ gilt, ist (A1) erfüllt. Weiterhin gilt $\emptyset \cup
+    \Omega = \Omega \in \mathfrak{A}_1$, womit nicht nur (A2) erfüllt ist,
+    sondern auch die Definition der $\sigma$-Algebra, da $\emptyset$ und
+    $\Omega$ die einzigen Teilmengen von $\mathfrak{A}_1$ sind. Da für jede
+    Menge $A \cup A = A$ gilt, brauchen wir nicht zeigen jede Teilmenge mit sich
+    selbst vereinigt in $\mathfrak{A}_1$ enthalten ist.
+
+  \item Wir nehmen die Erkenntnisse aus Teilaufgabe (a) und erweitern sie um
+    weitere Schlüsse:
+    \begin{itemize}
+      \item $A \in \mathfrak{A}_2 \Rightarrow \overline{A} \in \mathfrak{A}_2$
+        \hfill (durch Mengendefinition vorgegeben)
+      \item $\overline{A} \in \mathfrak{A}_2 \Rightarrow A \in \mathfrak{A}_2$
+        \hfill (ebenfalls durch Mengendefinition vorgegeben)
+    \end{itemize}
+    Damit ist (A1) erfüllt. Weiterhin gilt:
+    \begin{itemize}
+      \item $\emptyset \cup A = A \in \mathfrak{A}_2$
+      \item $\emptyset \cup \overline{A} = \overline{A} \in \mathfrak{A}_2$
+      \item $\Omega \cup A = \Omega \in \mathfrak{A}_2$
+      \item $\Omega \cup \overline{A} = \Omega \in \mathfrak{A}_2$
+      \item $A \cup \overline{A} = A \cup \Omega \setminus A = \Omega \in \mathfrak{A}_2$
+    \end{itemize}
+
+  \item $\mathfrak{P}(\Omega)$ ist die Potenzmenge von $\Omega$, welche alle
+    Teilmengen von $\Omega$ enthält. Unter anderem enthält sie die leere Menge.
+
+    Sei $A \in \mathfrak{P}(\Omega)$, dann ist $\overline{A} = \Omega \setminus
+    A$. Da $\mathfrak{P}(\Omega)$ alle Teilmengen von $\Omega$ enthält, muss sie
+    auch die Teilmenge enthalten, welche alle Elemente von $\Omega$ ohne die aus
+    $A$ enthält. Damit wäre (A1) gezeigt.
+
+    Seien $A,B \in \mathfrak{P}(\Omega)$, dann ist $A \cup B$ die Menge, die
+    alle Elemente aus $A$ und $B$ enthält und damit wieder eine Teilmenge von
+    $\Omega$.  Diese Vereinigung muss wieder in $\mathfrak{P}(\Omega)$ enthalten
+    sein, da $\mathfrak{P}(\Omega)$ alle Teilmengen von $\Omega$ enthält.
+
+    Seien zuletzt $n \in \mathbb{N}$ und $A_1, A_2, \dots \in
+    \mathfrak{P}(\Omega)$ beliebige Elemente von $\mathfrak{P}(\Omega)$, dann
+    enthält $\bigcup\limits_{n=1}^{\infty} A_n$ alle Elemente der einzelnen
+    $A_1, A_2, \dots$. Diese Elemente müssen in $\Omega$ vorkommen, da die
+    einzelnen $A_1, A_2, \dots$ Elemente von $\mathfrak{P}(\Omega)$ sind.
+    Demnach ist die Vereinigung wieder eine Teilmenge von $\Omega$ und muss in
+    $\mathfrak{P}(\Omega)$ enthalten sein.
+\end{enumerate}
+
+\end{document}
