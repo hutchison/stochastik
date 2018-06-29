@@ -1,0 +1,230 @@
+\documentclass[
+  11pt,
+]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[]{parskip}
+\usepackage[]{microtype}
+\usepackage[cm, headings]{fullpage}
+\usepackage[ngerman]{babel}
+
+\usepackage[]{amsmath}
+\usepackage[]{amssymb}
+
+\usepackage[]{hyperref}
+\usepackage[]{enumerate}
+
+% Ermöglicht Zugriff auf die letzte Seite (z.B. \pageref{LastPage}):
+\usepackage{lastpage}
+
+\usepackage{booktabs}
+
+% Coole Zeichnungen:
+\usepackage{tikz}
+
+% coole Kopf- und Fußzeilen:
+\usepackage{fancyhdr}
+% Seitenstil ist natürlich fancy:
+\pagestyle{fancy}
+% alle Felder löschen:
+\fancyhf{}
+% Veranstaltung:
+\fancyhead[L]{Mathematik für Informatik 3 – Stochastik}
+% Seriennummer:
+\fancyhead[C]{Aufgabenblatt 3}
+% Name und Matrikelnummer:
+\fancyhead[R]{Martin Darmüntzel (7251955)}
+%\fancyfoot[L]{}
+%\fancyfoot[C]{\thepage}
+\fancyfoot[C]{\thepage\,/\,\pageref{LastPage}}
+% Linie oben/unten:
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+
+\begin{document}
+
+% Punktetabelle für Korrektoren:
+\begin{center}
+  \begin{tabular}{cccccc}
+    \toprule
+    \textbf{3.1} & \textbf{3.2} & \textbf{3.3} & \textbf{3.4} & \textbf{3.5} & $\Sigma$\\
+    \midrule
+    & & & & & \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+\subsection*{Aufgabe 1}
+\begin{enumerate}[(a)]
+  \item Da jede Zahl mit der gleichen Wahrscheinlichkeit auftritt, ist die Wahl
+    des klassischen diskreten Wahrscheinlichkeitsraums gerechtfertigt. Dabei ist
+    $\mathfrak{A} = \mathcal{P}(\Omega)$ und $P(\{\omega\}) = \frac{1}{|\Omega|}
+    = \frac{1}{64}$ für $\omega \in \Omega$ bzw. $P(A) = \frac{|A|}{|\Omega|}$
+    für $A \in \mathfrak{A}$.
+
+  \item Es gilt für $A,B,C$ und $P(A), P(B), P(C)$ folgendes:
+    \begin{align*}
+      A & = \left\{ (i,j) : i \in \{2,3,5,7\}, j \in \{1, \dots, 8\} \right\}\\
+      B & = \left\{ (i,j) : i \in \{1, \dots, 8\}, j \in \{1,4,6,8\} \right\}\\
+      C & = \left\{ (i,j) : i,j \in \{2,3,5,7\} \right\}
+        \cup \left\{ (i,j) : i,j \in \{1,4,6,8\} \right\}\\
+      A \cap B & = \left\{ (i,j) : i \in \{2,3,5,7\}, j \in \{1,4,6,8\} \right\}\\
+      P(A \cap B) &
+        = \frac{4 \cdot 4}{64}
+        = \frac{1}{4}
+        = \frac{1}{2} \cdot \frac{1}{2}
+        = \frac{4 \cdot 8}{64} \cdot \frac{8 \cdot 4}{64}
+        = P(A) \cdot P(B) \\
+      P(C) & = \frac{4 \cdot 4}{64} + \frac{4 \cdot 4}{64} = \frac{1}{2}\\
+      A \cap C & = \left\{ (i,j) : i,j \in \{2,3,5,7\} \right\}\\
+      P(A \cap C) &
+        = \frac{4 \cdot 4}{64}
+        = \frac{1}{4}
+        = \frac{1}{2} \cdot \frac{1}{2}
+        = P(A) \cdot P(C)\\
+      B \cap C & = \left\{ (i,j) : i,j \in \{1,4,6,8\} \right\}\\
+      P(B \cap C) &
+        = \frac{4 \cdot 4}{64}
+        = \frac{1}{4}
+        = \frac{1}{2} \cdot \frac{1}{2}
+        = P(B) \cdot P(C)\\
+      A \cap B \cap C & = \emptyset\\
+      P(A \cap B \cap C) & = 0 \neq \frac{1}{8} = P(A) \cdot P(B) \cdot P(C)
+    \end{align*}
+    Das heißt, dass die Ereignisse $A,B,C$ paarweise, aber nicht vollständig
+    unabhängig sind.
+
+  \item Es gilt für $A,B,D$ und $P(A), P(B), P(D)$ folgendes:
+    \begin{align*}
+      D & = \left\{ (i,j) : i \in \{2,3,5,7\}, j \in \{1,4,6,8\} \right\}
+      \cup
+      \left\{ (i,j) : i \in \{1,4,6,8\}, j \in \{2,3,5,7\} \right\}\\
+      P(D) & = \frac{4 \cdot 4}{64} +\frac{4 \cdot 4}{64} = \frac{1}{2}\\
+      A \cap D & = \left\{ (i,j) : i \in \{2,3,5,7\}, j \in \{1,4,6,8\} \right\}\\
+      P(A \cap D) & = \frac{4 \cdot 4}{64}
+      = \frac{1}{4} = \frac{1}{2} \cdot \frac{1}{2} = P(A) \cdot P(D)\\
+      B \cap D & = \left\{ (i,j) : i \in \{2,3,5,7\}, j \in \{1,4,6,8\} \right\}\\
+      P(B \cap D) & = \frac{4 \cdot 4}{64}
+      = \frac{1}{4} = \frac{1}{2} \cdot \frac{1}{2} = P(B) \cdot P(D)\\
+      A \cap B \cap D & = \left\{ (i,j) : i \in \{2,3,5,7\}, j \in \{1,4,6,8\} \right\}\\
+      P(A \cap B \cap D) & = \frac{4 \cdot 4}{64}
+      = \frac{1}{4} \neq \frac{1}{8}
+      = \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2}
+      = P(A) \cdot P(B) \cdot P(D)
+    \end{align*}
+    Das heißt, dass die Ereignisse $A,B,D$ paarweise, aber nicht vollständig
+    unabhängig sind.
+\end{enumerate}
+
+\subsection*{Aufgabe 2}
+\begin{enumerate}[(a)]
+  \item Damit die Zufallsgröße $X$ existieren kann, müssen $A_1, A_2, A_3$ und
+    $A_4$ disjunkt sein. Das heißt, dass $A_4 = $ „Die erste Zahl ist keine
+    Primzahl und die zweite Zahl ist nicht durch drei teilbar“ sein muss.
+
+  \item Für die Verteilungsfunktion $F_X$ gilt:
+    \begin{align*}
+      F_X(x) & = \begin{cases}
+      0 & \text{falls } x \leq 0\\
+      \frac{3}{16} & \text{falls } 0 < x \leq 1\\
+      \frac{1}{2} & \text{falls } 1 < x \leq 4\\
+      \frac{5}{8} & \text{falls } 4 < x \leq 9\\
+      1 & \text{falls } x > 9\\
+      \end{cases}
+    \end{align*}
+
+  \item Graph von $F_X$:
+    \begin{center}
+      \begin{tikzpicture}[scale=1]
+        \draw [->] (-1, 0) -- (10, 0) node [right] {$x$};
+        \draw [->] (0, -1) -- (0, 5.5) node [above] {$F_X(x)$};
+
+        \foreach \x in {1,...,9}
+          \draw (\x, 1pt) -- (\x, -1pt) node [anchor=north] {$\x$};
+        \draw (0,0) node [anchor=north east] {$0$};
+        \draw (1pt, 1) -- (-1pt, 1) node [anchor=east] {$\frac{1}{5}$};
+        \draw (1pt, 2) -- (-1pt, 2) node [anchor=east] {$\frac{2}{5}$};
+        \draw (1pt, 3) -- (-1pt, 3) node [anchor=east] {$\frac{3}{5}$};
+        \draw (1pt, 4) -- (-1pt, 4) node [anchor=east] {$\frac{4}{5}$};
+        \draw (1pt, 5) -- (-1pt, 5) node [anchor=east] {$1$};
+
+        \path (0, 0) node [shape=circle, fill, inner sep=0pt, minimum size=3pt] (x0) {};
+        \path (0, 0.9375) node [shape=circle, draw, inner sep=0pt, minimum size=3pt] (x1) {};
+        \path (1, 0.9375) node [shape=circle, fill, inner sep=0pt, minimum size=3pt] (x2) {};
+        \draw (x1) -- (x2);
+        \path (1, 2.5) node [shape=circle, draw, inner sep=0pt, minimum size=3pt] (x3) {};
+        \path (4, 2.5) node [shape=circle, fill, inner sep=0pt, minimum size=3pt] (x4) {};
+        \draw (x3) -- (x4);
+        \path (4, 3.125) node [shape=circle, draw, inner sep=0pt, minimum size=3pt] (x5) {};
+        \path (9, 3.125) node [shape=circle, fill, inner sep=0pt, minimum size=3pt] (x6) {};
+        \draw (x5) -- (x6);
+        \path (9, 5) node [shape=circle, draw, inner sep=0pt, minimum size=3pt] (x7) {};
+        \draw (x7) -- (10, 5);
+      \end{tikzpicture}
+    \end{center}
+\end{enumerate}
+
+\subsection*{Aufgabe 3}
+\begin{enumerate}[(a)]
+  \item $\Omega = \{0,1\}^n
+    = \{ (\omega_1, \dots, \omega_n) : \omega_i \in \{0,1\}, i \in \{1, \dots,
+    n\} \}$ und $\mathfrak{A} = \mathcal{P}(\Omega)$.
+
+  \item $P(D_1 \cap D_2 \cap \dots \cap D_n) = P(\{(1,1,\dots,1)\}) = 0{,}075^n$
+
+  \item Es gilt:
+    \begin{align*}
+      1 - 0{,}075^n & \geq 0{,}9999\\
+      0{,}075^n & \leq 0{,}0001\\
+      n & \geq \frac{\ln 0{,}0001}{\ln 0{,}075}\\
+      n & \geq 3{,}56 \Rightarrow n = 4
+    \end{align*}
+\end{enumerate}
+
+\subsection*{Aufgabe 4}
+
+Da $\lim\limits_{x \rightarrow \infty} F_X(x) = 1$, gilt
+\begin{align*}
+  1 & = \lim\limits_{x \rightarrow \infty} a + b e^{-\frac{1}{\alpha} x^{\alpha}}
+  = a + b \underbrace{\lim\limits_{x \rightarrow \infty} e^{-\frac{1}{\alpha}
+  x^{\alpha}}}_{=0}
+  = a
+\end{align*}
+und damit
+\begin{align*}
+  0 & = F_X(0)
+  = \lim\limits_{x \searrow 0} F_X(x)
+  = 1 + b \underbrace{\lim\limits_{x \searrow 0} e^{-\frac{1}{\alpha} x^{\alpha}}}_{=1}
+  \Rightarrow b = -1
+\end{align*}
+Die Dichte ergibt sich aus:
+\begin{equation*}
+  f_X(x) = \begin{cases}
+    \frac{d}{dx} F_X(x)
+    = \frac{d}{dx} 1 - e^{-\frac{1}{\alpha} x^{\alpha}}
+    = \frac{x^{\alpha - 1}}{e^{\frac{1}{\alpha} x^{\alpha}}}
+    & x > 0\\
+    0 & x \leq 0
+  \end{cases}
+\end{equation*}
+
+\subsection*{Aufgabe 5}
+
+\begin{enumerate}[(a)]
+  \item $a = -1$
+  \item $F_X(x) = \begin{cases}
+      x - \sin(x) & 0 \leq x \leq \pi\\
+      0 & x < 0 \text{\ oder } x > \pi
+    \end{cases}$
+  \item \begin{align*}
+      P \left(X \leq \frac{\pi}{6} \right) &
+      = \frac{\pi}{6} - \frac{1}{2}
+      \approx 0{,}0236\\
+      P \left(X \geq \frac{\pi}{3} \right) &
+      = 1 - P \left(X \leq \frac{\pi}{3} \right)
+      = 1 - \frac{\pi}{3} + \frac{\sqrt{3}}{2} \approx 0{,}819\\
+  \end{align*}
+\end{enumerate}
+
+\end{document}

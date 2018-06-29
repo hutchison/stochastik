@@ -1,0 +1,292 @@
+\documentclass[
+  11pt,
+]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[]{parskip}
+\usepackage[]{microtype}
+\usepackage[cm, headings]{fullpage}
+\usepackage[ngerman]{babel}
+
+\usepackage[]{amsmath}
+\usepackage[]{amssymb}
+
+\usepackage[]{hyperref}
+\usepackage[]{enumerate}
+
+% Ermöglicht Zugriff auf die letzte Seite (z.B. \pageref{LastPage}):
+\usepackage{lastpage}
+
+\usepackage{booktabs}
+
+% Coole Zeichnungen:
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% coole Kopf- und Fußzeilen:
+\usepackage{fancyhdr}
+% Seitenstil ist natürlich fancy:
+\pagestyle{fancy}
+% alle Felder löschen:
+\fancyhf{}
+% Veranstaltung:
+\fancyhead[L]{Mathematik für Informatik 3 – Stochastik}
+% Seriennummer:
+\fancyhead[C]{Aufgabenblatt 4}
+% Name und Matrikelnummer:
+\fancyhead[R]{Martin Darmüntzel (7251955)}
+%\fancyfoot[L]{}
+%\fancyfoot[C]{\thepage}
+\fancyfoot[C]{\thepage\,/\,\pageref{LastPage}}
+% Linie oben/unten:
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+
+\begin{document}
+
+% Punktetabelle für Korrektoren:
+\begin{center}
+  \begin{tabular}{ccccc}
+    \toprule
+    \textbf{4.1} & \textbf{4.2} & \textbf{4.3} & \textbf{4.4} & $\Sigma$\\
+    \midrule
+    & & & & \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+\subsection*{Aufgabe 1}
+\begin{enumerate}
+  \item[(b)] Es gilt
+    $\int\limits_{-\infty}^{\alpha} 0 dx = 0$
+    und
+    $e^{-\frac{\alpha - \alpha}{p}} = e^0 = 1$.
+    Daher ist
+    (mit Substitution von
+    $u := -\frac{x - \alpha}{p}$
+    und damit
+    $\phi'(u) = -p$)
+    \begin{equation*}
+      F_X(x)
+      = \int\limits_{-\infty}^{x} \frac{1}{p} e^{-\frac{x - \alpha}{p}} dx
+      = \int\limits_{\alpha}^{x} \frac{1}{p} e^{-\frac{x - \alpha}{p}} dx
+      = 1 - e^{-\frac{x - \alpha}{p}}
+      = 1 - e^{-\frac{x - \vartheta}{p}}
+    \end{equation*}
+
+  \item[(c)] Die Graphen von $F_X$ und $f_X$:
+    \begin{center}
+      \begin{tikzpicture}[scale=2]
+        \draw [very thin, color=gray] (-0.05, -0.05) grid (4.9, 1.2);
+        \draw [->] (-0.2,0) -- (4.9,0) node [below] {$x$};
+        \draw [->] (0,-0.2) -- (0,1.3) node {};
+        \draw (0,1) node [left] {$1$};
+        \draw (0,0) node [anchor=north east] {$0$};
+        \draw (1,0) node [below] {$1$};
+        \draw (2,0) node [below] {$2$};
+        \draw (3,0) node [below] {$3$};
+        \draw (4,0) node [below] {$4$};
+
+        \draw [thick] (-0.2,0) -- (1,0) [fill] circle (1pt);
+        \draw plot [domain=1.035:4.8] (\x,{0.5*exp(-(\x-1)/2)}) node [above] {$f_X$};
+        \draw plot [domain=1.035:4.8] (\x,{1-exp(-(\x-1)/2)}) node [above] {$F_X$};
+        \draw (1,0.5) circle (1pt);
+      \end{tikzpicture}
+    \end{center}
+
+  \item[(d)] Es sind:
+    \begin{align*}
+      F_Y (y) &
+        = F_X \left( \frac{y-b}{a} \right)
+        = F_X (y+\vartheta)
+        = 1 - e^{-\frac{y}{p}}\\
+      f_Y (y) &
+        = f_X \left( \frac{y-b}{a} \right) \frac{1}{|a|}
+        = f_X (y+\vartheta)
+        = \begin{cases}
+          \frac{1}{p} e^{-\frac{y}{p}}, & x > \alpha\\
+          0 & x \leq \alpha
+        \end{cases}\\
+      F_Z (z) &
+        = 1 - F_Y \left( \frac{z-b}{a} \right)
+        = 1 - F_Y(-p(z-2))
+        = 1 - \left( 1 - e^{z-2} \right)
+        = e^{z-2}\\
+      f_Z (z) &
+        = f_Y (-p (z-2) ) \cdot p
+        = \begin{cases}
+          e^{z-2} & x > \alpha\\
+          0 & x \leq \alpha
+        \end{cases}
+    \end{align*}
+\end{enumerate}
+
+\subsection*{Aufgabe 2}
+\begin{enumerate}[(a)]
+  \item Es gilt $F_X(45) = P(X < 45) = 0{,}95 = 1-e^{-45 \cdot \lambda}$ und
+    damit $\lambda = \frac{\ln(0{,}05)}{-45} \approx 0{,}06657$.
+  \item Wir suchen $x$ für $F_X(x) = 0{,}99 \leq 1-e^{-\lambda x}$.
+    Es gilt $x \geq 45 \cdot \frac{\ln(0{,}01)}{\ln(0{,}05)} \approx 69{,}176$.
+    Damit wird ein Druckauftrag mit einer Wahrscheinlichkeit von $0{,}99$ die
+    Dauer von 70\,s nicht überschreiten.
+  \item $P(15 < X < 30)
+    = F_X(30) - F_X(15)
+    = 1-e^{-30\lambda} - \left( 1-e^{-15\lambda} \right)
+    = e^{-15\lambda} - e^{-30\lambda} \approx 0{,}2327$
+  \item
+    \begin{equation*}
+      P(X < 45 \mid X > 30)
+      = \frac{1 - P(X<30)}{P(X<45)}
+      \approx 0{,}1429
+    \end{equation*}
+\end{enumerate}
+
+\subsection*{Aufgabe 3}
+\begin{enumerate}[(a)]
+  \item Es ist die Binomialverteilung mit $p = r = \frac{1}{3}$ und $n = 15$.
+
+  \item
+    \begin{enumerate}[i)]
+      \item $P(X = 0)
+        = \binom{15}{0} {\left( \frac{1}{3} \right)}^0 {\left( \frac{2}{3} \right)}^{15}
+        \approx 0{,}0023$
+      \item $P(X > 1)
+        = 1 - (P(X=0) + P(X=1))
+        \approx 0{,}9806$
+      \item $P(X \geq 13)
+        = P(X = 13) + P(X = 14) + P(X = 15)
+        \approx 0{,}0000314$
+      \item $P(X < 4)
+        = P(X = 0) + P(X = 1) + P(X = 2) + P(X = 3)
+        \approx 0{,}2092$
+      \item $P(X = 7 \mid 4 \leq X \leq 12)
+        = \frac{P(X=7)}{P(4 \leq X \leq 12)}
+        = \frac{P(X=7)}{\sum\limits_{k = 4}^{12} P(X = k)}
+        \approx 0{,}1452$
+    \end{enumerate}
+
+  \item $\mathbb{E}X = n \cdot p = 15 \cdot \frac{1}{3} = 5$.
+
+  \item $V(X) = n \cdot p \cdot (1-p) = 15 \cdot \frac{1}{3} \cdot \frac{2}{3} =
+    \frac{10}{3}$
+\end{enumerate}
+
+\subsection*{Aufgabe 4}
+\begin{enumerate}[(a)]
+  \item Es gilt
+    \begin{align*}
+      p_2 & = 2 p_1,
+      \quad p_3 = \frac{3}{2} p_2 = 3 p_1,
+      \quad p_4 = 4 p_1,
+      \quad p_5 = 5 p_1,
+      \quad p_6 = 6 p_1\\
+      1 & = p_1 + p_2 + p_3 + p_4 + p_5 + p_6\\
+      \Rightarrow 1 & = p_1 + 2 p_1 + 3 p_1 + 4 p_1 + 5 p_1 + 6 p_1 = 21 p_1
+    \end{align*}
+    Daraus folgt für die Einzelwahrscheinlichkeiten:
+    \begin{align*}
+      p_1 & = \frac{1}{21},
+      \quad p_2 = \frac{2}{21},
+      \quad p_3 = \frac{3}{21},
+      \quad p_4 = \frac{4}{21},
+      \quad p_5 = \frac{5}{21},
+      \quad p_6 = \frac{6}{21}
+    \end{align*}
+  \item Für $F_X$ gilt
+    \begin{align*}
+      F_X (x) =
+      \begin{cases}
+        0 & \phantom{1 \leq\;} x < 1\\
+        \frac{1}{21} & 1 \leq x < 2\\
+        \frac{3}{21} & 2 \leq x < 3\\
+        \frac{6}{21} & 3 \leq x < 4\\
+        \frac{10}{21} & 4 \leq x < 5\\
+        \frac{15}{21} & 5 \leq x < 6\\
+        1 & \phantom{5 \leq\;} x \geq 6
+      \end{cases}
+    \end{align*}
+    \begin{center}
+      \begin{tikzpicture}[yscale=6,xscale=2]
+        \draw [very thin, color=gray] (0, 0) grid (6.3, 1.1);
+        \draw [->] (-0.1,0) -- (6.5,0) node [below] {$k$};
+        \draw [->] (0,-0.1) -- (0,1.1) node [above] {$F_X(x)$};
+        \draw (0,1) node [left] {$1$};
+        \draw (0,0) node [anchor=north east] {$0$};
+        \draw (1,0) node [below] {$1$};
+        \draw (2,0) node [below] {$2$};
+        \draw (3,0) node [below] {$3$};
+        \draw (4,0) node [below] {$4$};
+        \draw (5,0) node [below] {$5$};
+        \draw (6,0) node [below] {$6$};
+        \draw (-0.05, 0.047619) -- (0.05, 0.047619)
+          node [left, xshift=-5pt] {$\frac{1}{21}$};
+        \draw (-0.05, 0.142857) -- (0.05, 0.142857)
+          node [left, xshift=-5pt] {$\frac{3}{21}$};
+        \draw (-0.05, 0.285714) -- (0.05, 0.285714)
+          node [left, xshift=-5pt] {$\frac{6}{21}$};
+        \draw (-0.05, 0.47619) -- (0.05, 0.47619)
+          node [left, xshift=-5pt] {$\frac{10}{21}$};
+        \draw (-0.05, 0.714286) -- (0.05, 0.714286)
+          node [left, xshift=-5pt] {$\frac{15}{21}$};
+
+        \path (1, 0) node
+          [shape=circle, draw=black, fill=white, inner sep=0pt, minimum size=5pt]
+          (e0) {};
+        \draw [thick] (-0.1, 0) -- (e0);
+        \path (1, 0.047619) node
+          [shape=circle, draw=black, fill=black, inner sep=0pt, minimum size=5pt]
+          (a1) {};
+        \path (2, 0.047619) node
+          [shape=circle, draw=black, fill=white, inner sep=0pt, minimum size=5pt]
+          (e1) {};
+        \path (2, 0.142857) node
+          [shape=circle, draw=black, fill=black, inner sep=0pt, minimum size=5pt]
+          (a2) {};
+        \path (3, 0.142857) node
+          [shape=circle, draw=black, fill=white, inner sep=0pt, minimum size=5pt]
+          (e2) {};
+        \path (3, 0.285714) node
+          [shape=circle, draw=black, fill=black, inner sep=0pt, minimum size=5pt]
+          (a3) {};
+        \path (4, 0.285714) node
+          [shape=circle, draw=black, fill=white, inner sep=0pt, minimum size=5pt]
+          (e3) {};
+        \path (4, 0.47619) node
+          [shape=circle, draw=black, fill=black, inner sep=0pt, minimum size=5pt]
+          (a4) {};
+        \path (5, 0.47619) node
+          [shape=circle, draw=black, fill=white, inner sep=0pt, minimum size=5pt]
+          (e4) {};
+        \path (5, 0.714286) node
+          [shape=circle, draw=black, fill=black, inner sep=0pt, minimum size=5pt]
+          (a5) {};
+        \path (6, 0.714286) node
+          [shape=circle, draw=black, fill=white, inner sep=0pt, minimum size=5pt]
+          (e5) {};
+        \path (6, 1) node
+          [shape=circle, draw=black, fill=black, inner sep=0pt, minimum size=5pt]
+          (a6) {};
+
+        \draw (a1) -- (e1);
+        \draw (a2) -- (e2);
+        \draw (a3) -- (e3);
+        \draw (a4) -- (e4);
+        \draw (a5) -- (e5);
+        \draw (a6) -- (6.5, 1);
+      \end{tikzpicture}
+    \end{center}
+  \item
+    \begin{align*}
+      \mathbb{E}X &
+      = \sum\limits_{k=1}^{6} k \cdot p_k
+      = \frac{13}{3}\\
+      V(X) &
+      = \sum\limits_{k=1}^{6} {(k - \mathbb{E}X)}^2 \cdot p_k
+      = \frac{20}{9}\\
+      \mathbb{E}Y & = \mathbb{E}(3X-2) = 3\mathbb{E}X - 2 = 11\\
+      V(Y) & = V(3X-2) = 9V(X) = 20
+    \end{align*}
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,152 @@
+\documentclass[
+  11pt,
+]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[]{parskip}
+\usepackage[]{microtype}
+\usepackage[cm, headings]{fullpage}
+\usepackage[ngerman]{babel}
+
+\usepackage[]{amsmath}
+\usepackage[]{amssymb}
+
+\usepackage[]{amsthm}
+\newtheoremstyle{satz}
+  {10pt}        % Abstand nach oben
+  {10pt}        % Abstand nach unten
+  {}            % Schriftart für Textkörper
+  {}            % Einrückung
+  {\bfseries}   % Schriftart für Textkopf („Satz“)
+  {}           % Symbol nach Textkopf
+  {0.5em}       % Abstand nach Textkopf (\newline ist möglich)
+  {}            % Spezifikation des Textkopfes
+\theoremstyle{satz}
+\newtheorem{satz}{Satz}[]
+
+\newtheoremstyle{definition}
+  {10pt}        % Abstand nach oben
+  {10pt}        % Abstand nach unten
+  {}            % Schriftart für Textkörper
+  {}            % Einrückung
+  {\bfseries}   % Schriftart für Textkopf („Satz“)
+  {}           % Symbol nach Textkopf
+  {0.5em}       % Abstand nach Textkopf (\newline ist möglich)
+  {}            % Spezifikation des Textkopfes
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[]
+
+\newtheoremstyle{beispiel}
+  {10pt}        % Abstand nach oben
+  {10pt}        % Abstand nach unten
+  {}            % Schriftart für Textkörper
+  {}            % Einrückung
+  {\bfseries}   % Schriftart für Textkopf („Satz“)
+  {}           % Symbol nach Textkopf
+  {0.5em}       % Abstand nach Textkopf (\newline ist möglich)
+  {}            % Spezifikation des Textkopfes
+\theoremstyle{beispiel}
+\newtheorem{beispiel}{Beispiel}[]
+
+\usepackage[]{hyperref}
+\usepackage[]{enumerate}
+
+% Ermöglicht Zugriff auf die letzte Seite (z.B. \pageref{LastPage}):
+\usepackage{lastpage}
+
+\usepackage{booktabs}
+
+% Coole Zeichnungen:
+\usepackage{tikz}
+
+% coole Kopf- und Fußzeilen:
+\usepackage{fancyhdr}
+% Seitenstil ist natürlich fancy:
+\pagestyle{fancy}
+% alle Felder löschen:
+\fancyhf{}
+% Veranstaltung:
+\fancyhead[L]{Mathematik für Informatik 3 – Stochastik}
+% Seriennummer:
+\fancyhead[C]{}
+% Name und Matrikelnummer:
+\fancyhead[R]{Martin Darmüntzel}
+\fancyfoot[L]{Mitschrift}
+%\fancyfoot[C]{\thepage}
+\fancyfoot[C]{\thepage\,/\,\pageref{LastPage}}
+% Linie oben/unten:
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+
+\begin{document}
+
+\begin{definition}[Verteilungsfunktion]
+  Sei $X: \Omega \rightarrow \mathbb{R}$ eine Zufallsgröße. Dann heißt
+  \begin{equation*}
+    F_X(x)
+    = P(X < x)
+    = P( \{ \omega \in \Omega : X(\omega) < x\} )
+    = P( X^{-1} (-\infty, x)), x \in \mathbb{R}
+  \end{equation*}
+  die \textit{Verteilungsfunktion} von $X$. Die Verteilungsfunktion gibt an, wie
+  groß die Wahrscheinlichkeit ist, dass $X$ einen Wert kleiner als $x$ annimmt
+  ($P(X<x)$).
+\end{definition}
+
+\begin{satz}[Eigenschaften der Verteilungsfunktion]
+  Die Verteilungsfunktion einer Zufallsgröße $X$ besitzt folgende Eigenschaften:
+  \begin{enumerate}[(1)]
+    \item $F_X(x_1) \leq F_X(x_1)$ für $x_1 \leq x_2$, d.\,h. $F_X$ ist monoton
+      nicht fallend.
+    \item $\lim\limits_{h \searrow 0} F_X(x-h) = F_X(x)$, d.\,h. $F_X$ ist
+      linksseitig stetig.
+    \item $\lim\limits_{x \rightarrow \infty} F_X(x) = 1, \lim\limits_{x
+      \rightarrow -\infty} F_X(x) = 0$
+  \end{enumerate}
+\end{satz}
+
+\begin{definition}[Wahrscheinlichkeitsdichte]
+  Sei $P$ ein Wahrscheinlichkeitsmaß und $X$ eine (reelle) Zufallsvariable.
+  Eine Funktion $f: \mathbb{R} \rightarrow [0, \infty)$
+  heißt \textit{Wahrscheinlichkeitsdichte} von $X$, falls gilt
+  \begin{equation*}
+    P(a \leq X < b) = \int\limits_a^b f_X(x) dx
+  \end{equation*}
+  für reelle Zahlen $a < b$.
+\end{definition}
+
+\begin{satz}
+  Es ist $\int\limits_{-\infty}^{\infty} f_X(t) dt = 1$ und in allen
+  Stetigkeitsstellen $x$ von $f_X$ gilt $F'_X(x) = f_X(x)$.
+\end{satz}
+
+\begin{beispiel}
+  40 Pleulstangen vermessen an einer vorgegebenen Stelle, Abweichungen vom
+  Sollwert notiert:
+  $x_1, \dots, x_{40}$;
+  man berechnet
+  $\overline{x_{40}} = 17{,}15 \, \mu m, s_{40} = 4{,}54 \, \mu m$
+
+  \textbf{Annahme:} Abweichung $X$ vom Sollwert ist normalverteilte Zufallsgröße
+  (Erfahrungswert).
+
+  \textbf{Gesucht:} Konfidenzintervall für erwartete Abweichung vom Sollwert zum
+  Konfidenz-Umfang $\varepsilon = 1 - \alpha = 0{,}99 \quad 1 - \frac{\alpha}{2}
+  = 0{,}995 \quad t_{39;\, 0{,}995} \approx 2{,}70$
+  \begin{align*}
+    \phi_{\text{unten}} (x_1, \dots, x_{40}) & = 17{,}15 -
+    \frac{4{,}54}{\sqrt{40}} \cdot 2{,}7 \approx 15{,}21\\
+    \phi_{\text{oben}} (x_1, \dots, x_{40}) & = 17{,}15 + \frac{4{,}54}{\sqrt{40}}
+    \cdot 2{,}7 \approx 19{,}09
+  \end{align*}
+  Damit ist $[15{,}21; 19{,}09]$ ist Realisierung eines Konfidenzintervalls,
+  welches mit Wahrscheinlichkeit $0{,}99$ den unbekannten Wert $\mu$ überdeckt.
+
+  \begin{itemize}
+    \item Die Aussage „$15{,}21 < \mu < 19{,}09$“ ist entweder wahr oder falsch.
+      Ihr kommt keine Wahrscheinlichsinterpretation zu.
+  \end{itemize}
+\end{beispiel}
+
+\end{document}

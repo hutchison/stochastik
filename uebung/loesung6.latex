@@ -1,0 +1,163 @@
+\documentclass[
+  11pt,
+]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[]{parskip}
+\usepackage[]{microtype}
+\usepackage[
+  %cm,
+  headings
+]{fullpage}
+\usepackage[ngerman]{babel}
+
+\usepackage[]{amsmath}
+\usepackage[]{amssymb}
+
+\usepackage[]{hyperref}
+\usepackage[]{enumerate}
+
+% Ermöglicht Zugriff auf die letzte Seite (z.B. \pageref{LastPage}):
+\usepackage{lastpage}
+
+\usepackage{booktabs}
+
+% Coole Zeichnungen:
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% coole Kopf- und Fußzeilen:
+\usepackage{fancyhdr}
+% Seitenstil ist natürlich fancy:
+\pagestyle{fancy}
+% alle Felder löschen:
+\fancyhf{}
+% Veranstaltung:
+\fancyhead[L]{Mathematik für Informatik 3\\Stochastik}
+% Seriennummer:
+\fancyhead[C]{Aufgabenblatt 6\\}
+% Name und Matrikelnummer:
+\fancyhead[R]{Martin Darmüntzel (7251955)\\}
+%\fancyfoot[L]{}
+%\fancyfoot[C]{\thepage}
+\fancyfoot[C]{\thepage\,/\,\pageref{LastPage}}
+% Linie oben/unten:
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+
+\begin{document}
+
+% Punktetabelle für Korrektoren:
+\begin{center}
+  \begin{tabular}{ccccc}
+    \toprule
+    \textbf{6.1} & \textbf{6.2} & \textbf{6.3} & \textbf{6.4} & $\Sigma$\\
+    \midrule
+    & & 0 & & \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+\subsection*{Aufgabe 1}
+
+\begin{enumerate}[(a)]
+  \item Satz 5, \texttt{StoV6}
+
+  \item Da $Z$ die Dichte $\phi_{0,1}$ besitzt, gilt:
+    \begin{align*}
+      \mathbb{E} Z & =
+        \int\limits_{-\infty}^{\infty}
+        z \cdot \phi_{0,1}(z) dz
+      =
+        \int\limits_{-\infty}^{\infty}
+        \frac{1}{\sqrt{2\pi}} z
+        e^{- \frac{z^2}{2}} dz
+      =
+        \frac{1}{\sqrt{2\pi}}
+        \underbrace{%
+          \int\limits_{-\infty}^{\infty} z e^{- \frac{z^2}{2}} dz
+        }_{= 0\ (\text{ungerade Funktion})} = 0
+    \end{align*}
+    Und für die Varianz gilt:
+    \begin{align*}
+      \text{Var } Z & = \mathbb{E} ({(Z-\mu)}^2) = \mathbb{E} (Z^2)\\
+      & =
+        \int\limits_{-\infty}^{\infty}
+        \frac{1}{\sqrt{2\pi}} z^2 e^{- \frac{z^2}{2}} dz
+        & \text{subst. } u:= \frac{z^2}{2}\\
+      & =
+        \frac{2}{\sqrt{2\pi}}
+        \int\limits_{0}^{\infty}
+        \sqrt{2u} e^{-u} du\\
+      & =
+        \frac{2}{\sqrt{\pi}}
+        \underbrace{%
+          \int\limits_{0}^{\infty}
+          \sqrt{u} e^{-u} du
+        }_{\Gamma\left(\frac{3}{2}\right) = \frac{\sqrt{\pi}}{2}}
+        = 1
+    \end{align*}
+
+  \item Es gilt $\mathbb{E} X = \mu$ und $\text{Var\,} X = \sigma^2$.
+
+  \item Der erwartungstreue Schätzer für $\mu$ ist $\overline{X}_n$ und der für
+    $\sigma^2$ ist
+    $\frac{1}{n-1} \sum\limits_{i=1}^{n} (X_i - \overline{X}_n)^2$.
+\end{enumerate}
+
+\subsection*{Aufgabe 2}
+
+\begin{enumerate}[(a)]
+  \item Die Verteilungsfunktion lautet
+    \begin{align*}
+      F_{X_1}(t) & =
+        \begin{cases}
+          0, & t \leq 0\\
+          \frac{t}{3\theta}, & 0 < t < 3 \theta\\
+          1, & t \geq 3 \theta
+        \end{cases}
+    \end{align*}
+  und der Erwartungswert liegt genau in der Mitte des Intervalls, also
+  \begin{align*}
+    \mathbb{E} X_1 & = \frac{3 \theta}{2}
+  \end{align*}
+\end{enumerate}
+
+\subsection*{Aufgabe 4}
+
+$\sigma^2 = 0.6 \quad \sigma = \sqrt{0.6} \quad n = 20 \quad \overline{X}_{20} =
+1.5 \quad \varepsilon = 0.99$
+
+\begin{enumerate}[(a)]
+  \item $\varepsilon = 1 - \alpha \Rightarrow \alpha = 0.01$
+    \begin{align*}
+      KI & =
+      \left(
+        \overline{X}_n - \frac{\sigma}{\sqrt{n}} \cdot Z_{1 - \frac{\alpha}{2}},
+        \overline{X}_n + \frac{\sigma}{\sqrt{n}} \cdot Z_{1 - \frac{\alpha}{2}}
+      \right)\\
+      & =
+      \left(
+        1.5 - \frac{\sqrt{0.6}}{\sqrt{20}} \cdot Z_{1 - \frac{0.01}{2}},
+        1.5 + \frac{\sqrt{0.6}}{\sqrt{20}} \cdot Z_{1 - \frac{0.01}{2}}
+      \right)\\
+      & =
+      \left(
+        1.5 - \frac{\sqrt{0.6}}{\sqrt{20}} \cdot Z_{0.995},
+        1.5 + \frac{\sqrt{0.6}}{\sqrt{20}} \cdot Z_{0.995}
+      \right)\\
+    \end{align*}
+    Wir setzen $Z_{0.995} = 2.5758$ und erhalten für das Konfidenzintervall
+    $KI = (1.0539, 1.9461)$.
+  \item
+    \begin{align*}
+      \Delta \mu & \leq 0.05\\
+      2 \cdot \frac{\sigma}{\sqrt{n}} \cdot Z_{1-\frac{\alpha}{2}} & \leq 0.05\\
+      2 \cdot \frac{\sqrt{0.6}}{\sqrt{n}} \cdot 2.5758\\
+      6369.499 & \leq n
+    \end{align*}
+    Das heißt, es werden mindestens $6370$ Stichproben benötigt.
+\end{enumerate}
+
+\end{document}
